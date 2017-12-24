@@ -1,0 +1,151 @@
+#MainDiv { 
+    margin: 50px 20% 50px 20%;
+    padding: 20px 30px 20px 30px;
+}
+
+#HeaderDiv { text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); }
+
+#MenuDiv {
+    background-color: #e9e9ed;
+    border-color: #dadee4;
+    border: 1px;
+    border-radius: 3px;
+    padding: 8px;
+    font-style: italic;
+}
+
+#LoginDiv { text-align:center; }
+
+input.LoginInput { 
+    padding: 2px 2px; 
+    line-height: 5px; 
+    width:170px;
+}
+
+#SignUpTable { margin-top: 50px; }
+
+td.SignUp { width: 50%; }
+
+#SearchDiv {  }
+
+#ResultStats { font-size: small; }
+
+input.SearchForm { display: inline; }
+
+#FactTable {
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+    border: 3px solid black;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 10px;
+    table-layout: fixed;
+    width: 100%;
+    font: 13px/1.231 arial,helvetica,clean,sans-serif;
+}
+
+p { text-align: justify; }
+
+a { text-decoration: none; }
+
+#PagesDiv { margin: 10px; text-align: center; }
+
+input.TextInput {
+    margin-bottom: 10px;
+    position: relative;
+    box-sizing: border-box;
+    outline: medium none;
+    border: 1px solid ;
+    border-radius: 4px;
+}
+
+input.TextInput:focus {
+    background-color: #D9D9D9;
+}
+
+input.Button {
+    color: #FFF !important;
+    text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.16);
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0px;
+    border-radius: 4px;
+    border: 1px solid #B91E00;
+    background: #DE0000 linear-gradient(to bottom, rgba(255, 255, 255, 0) 0px, rgba(0, 0, 0, 0.2) 100%) ;
+}
+
+a.PageLink { 
+    margin: 1px; 
+    padding: 5px;     
+    background-color: #E9E9ED;
+    font-size: 12px;
+    color: #1E1E1E;
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.3) inset;
+    border-radius: 3px;
+}
+
+a.PageLink:hover { 
+    background-color: #DADEE4;
+}
+
+#ActivePage {
+    background-color: #2D4368; 
+    color: #FFF;
+    
+}
+
+.Hidden { display: none; }
+
+td.Facts { width: 78%; border-bottom: 1px solid black; padding: 0px 8px 0px 8px;  }
+
+tr.TFBItem:hover { font-style: italic; background-color: #e9e9ed; border-bottom: 1px solid black; }
+
+
+.Highlight { background-color: yellow; }
+
+a.DeleteButton {  }
+
+.TagsDiv {
+    margin: 4px;
+}
+
+a.TagButton:hover { 
+    color: #3E6D8E;
+    background-color: #DAE6EF;
+    border: 1px solid #DAE6EF;
+    font-weight: bold;
+}
+
+a.TagButton {
+    font-size: 12px;
+    padding: 0.4em 0.5em;
+    border: 1px solid #E4EDF4;
+    margin: 2px;
+    border-radius: 1px;
+    text-align: center;
+    line-height: 1;
+}
+
+td.Time { width: 12%; padding: 0px 5px 0px 5px;}
+
+#AddFactTable {
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 10px 10px 10px 10px;
+    width: 100%;
+}
+
+#footer {
+    margin: 50px;
+    font-size:12px;
+    text-align:center;
+}
+
+#footer a { color: black; }
+
+#footer a:hover {
+    text-style:italic;
+    text-size:15px;
+    color:red;
+}
+
