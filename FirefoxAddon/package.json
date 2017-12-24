@@ -1,0 +1,44 @@
+{
+    "name": "tfb-addon",
+    "title": "TheFactBook - Addon",
+    "id": "jid1-LUiYmM0JbNMByg",
+    "description": "Add Facts to your TFB Instance easily",
+    "author": "Andrés Vargas",
+    "license": "MPL 2.0",
+    "version": "0.2",
+
+    "preferences": 
+    [
+	{
+	    "name": "tfbUrl",
+	    "title": "TFP Api",
+	    "description": "Where is your TFB Instance Located? (ex: http://thefactbook.ml/)",
+	    "type": "string",
+	    "value": "http://thefactbook.ml/"
+	},
+	{
+	    "name": "tfbEditBeforeSend",
+	    "title": "Edit before send",
+	    "description":"Edit fact before sending it. We encourage our users to use Tags in order to easily search on their facts later",
+	    "type": "bool",
+	    "value": true
+	},
+	{
+	    "name": "tfbUser",
+	    "title": "Username",
+	    "description": "Username",
+	    "type": "string",
+	    "value":"guest"
+	},
+	{
+	    "name": "tfbPassword",
+	    "title": "Password",
+	    "description":"Password",
+	    "type": "string",
+	    "value": "guest"
+	}
+    ]
+}
+
+
+
