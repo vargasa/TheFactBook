@@ -1,0 +1,37 @@
+{
+
+    "name": "TheFactBook Addon",
+    "description": "Add Facts to your TFB Instance easily",
+    "author": "Andrés Vargas",
+    "version": "0.1",
+    "manifest_version":2,
+
+    "options_ui":{
+	"page":"TFBPreferences.html",
+	"chrome_style":true
+    },
+
+    "icons": { 
+        "128": "Data/TFBIcon.png" 
+    },
+    
+    "permissions": [
+	"storage",
+        "contextMenus",
+	"tabs",
+	"notifications",
+	"http://*/",
+	"https://*/"
+    ],
+
+    "background":{
+	"default-title":"TFB",
+	"scripts":["TFBMain.js"]
+    },
+    
+    "browser_action":{
+	"default_title": "TheFactBook Preferences",
+	"default_popup": "TFBPreferences.html"
+    }
+
+}

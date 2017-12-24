@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>TheFactBook Extension - Preferences</title>
+  </head>
+  <body>
+    <h1>TheFactBook - Preferences</h1>
+    <form>
+      <label for="UrlInput">TFB Url:</label><br/>
+      <input id="UrlInput" type="text" name="TfbUrl" value="" required/><br/>
+      <label for="TimeoutInput">Timeout:</label><br/>
+      <input id="TimeoutInput" type="number" name="TfbTimeout" value="" required/><br/>
+      <label for="UsernameInput">Username:</label><br/>
+      <input id="UsernameInput" type="text" name="TfbUsername" value="" required/><br/>
+      <label for="PasswordInput">Password:</label><br/>
+      <input id="PasswordInput" type="password" name="TfbPassword" value="" required/><br/>
+      <label for="EditBeforeSendCheckbox">Edit before send: </label>
+      <input type="checkbox" id="EditBeforeSendCheckbox" /><br/>
+      <input id="SaveButton" type="button" value="Save" />
+    </form>
+  </body>
+  <div id="StatusLabel"></div>
+  <script src="TFBPreferences.js"></script>
+</html>

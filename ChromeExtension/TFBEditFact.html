@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>Edit fact before send</title>
+    <script src="TFBEditFact.js"></script>
+  </head>
+  <body>
+    <form id="EditFactForm">
+      <table>
+	<tbody>
+	  <tr>
+	    <td><label for="FactInput">Fact:</label></td>
+	    <td><textarea id="FactInput" style="width: 240px; height: 100px;"></textarea></td>
+	  </tr>
+	  <tr>
+	    <td><label for="SourceInput">Source:</label></td>
+	    <td><input for="text" id="SourceInput" /></td>
+	  </tr>
+	  <tr>
+	    <td><label for="TagsInput">Tags (Comma separated): </label></td>
+	    <td><input type="text" id="TagsInput" /></td>
+	  </tr>
+	  <tr>
+	    <td><label for="EditOption">Don't show again</label></td>
+	    <td><input type="checkbox" id="EditOption" /></td>
+	  </tr>
+	</tbody>
+      </table>
+      <p><input type="Submit" id="SubmitButton" value="Send" /></p>
+    </form>
+</html>
