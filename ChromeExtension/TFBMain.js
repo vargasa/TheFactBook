@@ -46,8 +46,46 @@ function sendFact(fact, source, tags, tfbSettings) {
     http.send(params);
 }
 
+function sendRequest(fact,source,tfbSettings) {
+    if (tfbSettings.editBeforeSend) {
+        chrome.tabs.create({
+            url: chrome.extension.getURL('TFBEditFact.html'),
+            active: true,
+        }, function(tab) {
+            chrome.windows.create({
+                tabId: tab.id,
+                width: 450,
+                height: 260,
+                type: "popup"
+            });
+            chrome.runtime.sendMessage({
+                msg: "editFact",
+                fact: fact,
+                source: source
+            });
+            chrome.runtime.onMessage.addListener(
+                function(request, sender, sendResponse){
+                    if (request.msg == "sendFact"){
+                        sendFact(request.fact,
+                                 request.source,
+                                 request.tags,
+                                 tfbSettings);
+                        if ( request.dontEdit ){
+                            chrome.storage.sync.set({ "tfbEditBeforeSend": false });
+                        }
+                        chrome.tabs.remove(tab.id);
+                    }
+                }
+            );
+        });
+    } else {
+        sendFact(fact, source, "", tfbSettings);
+    }
+};
+
 var clickHandler = function(e) {
 
+    fact = e.selectionText;
 
     //--------------------------------------------------------------------------//
 
@@ -74,51 +112,13 @@ var clickHandler = function(e) {
         }
         //--------------------------------------------------------------------------//
         function getAsyncTabUrl(tabs) {
-            tabUrl = tabs[0].url;
-            sendRequest(tabUrl);
+            source = tabs[0].url;
+            sendRequest(fact,source,tfbSettings);
         }
-
         chrome.tabs.query({currentWindow: true, active: true}, getAsyncTabUrl);
         //--------------------------------------------------------------------------//
-
-        function sendRequest(tabUrl) {
-
-            if (tfbSettings.editBeforeSend) {
-                chrome.tabs.create({
-                    url: chrome.extension.getURL('TFBEditFact.html'),
-                    active: true,
-                }, function(tab) {
-
-                    chrome.windows.create({
-                        tabId: tab.id,
-                        width: 450,
-                        height: 260,
-                        type: "popup"
-                    });
-                    chrome.runtime.sendMessage({
-                        msg: "editFact",
-                        fact: e.selectionText,
-                        source: tabUrl
-                    });
-                    chrome.runtime.onMessage.addListener(
-                        function(request, sender, sendResponse){
-                            if (request.msg == "sendFact"){
-                                sendFact(request.fact, request.source, request.tags, tfbSettings);
-                                if ( request.dontEdit ){
-                                    chrome.storage.sync.set({ "tfbEditBeforeSend": false });
-                                }
-                                chrome.tabs.remove(tab.id);
-                            }
-                        }
-                    );
-                });
-            } else {
-                sendFact(e.selectionText, tabUrl, "", tfbSettings);
-            }
-        }
     }
 }
-
 
 //--------------------------------------------------------------------------//
 
