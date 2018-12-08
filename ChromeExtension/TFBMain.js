@@ -21,7 +21,7 @@ var clickHandler = function(e) {
     //--------------------------------------------------------------------------//
 
     var tfbDefaultOptions = {
-	tfbUrl: 'http://thefactbook.ml/',
+	tfbUrl: 'https://thefactbook.ml/',
 	tfbTimeout: 5,
 	tfbUsername: 'guest',
 	tfbPassword: 'guest',
@@ -63,7 +63,7 @@ var clickHandler = function(e) {
 		
 		
 		http.onreadystatechange = function () {
-		    if (  http.readyState == 4 && http.status == 200) {
+		    if (  this.readyState == 4 && this.status == 200) {
 			var r = http.responseText;
 			r = JSON.parse(r);
 			if (! r.Error){

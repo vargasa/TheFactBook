@@ -34,7 +34,7 @@ function saveOptions() {
 function restoreOptions() {
 
     var tfbDefaultOptions = {
-	tfbUrl: 'http://thefactbook.ml/',
+	tfbUrl: 'https://thefactbook.ml/',
 	tfbTimeout: 5,
 	tfbUsername: 'guest',
 	tfbPassword: 'guest',
