@@ -1,0 +1,3 @@
+[submodule "ChromeExtension/Data/materialize"]
+	path = ChromeExtension/Data/materialize
+	url = https://github.com/Dogfalo/materialize.git
