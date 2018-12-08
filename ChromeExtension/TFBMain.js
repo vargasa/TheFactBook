@@ -52,11 +52,11 @@ var clickHandler = function(e) {
     //--------------------------------------------------------------------------//
 
     var tfbDefaultOptions = {
-	tfbUrl: 'https://thefactbook.ml/',
-	tfbTimeout: 5,
-	tfbUsername: 'guest',
-	tfbPassword: 'guest',
-	tfbEditBeforeSend: true
+        tfbUrl: 'https://thefactbook.ml/',
+        tfbTimeout: 5,
+        tfbUsername: 'guest',
+        tfbPassword: 'guest',
+        tfbEditBeforeSend: true
     };
 
     chrome.storage.sync.get(tfbDefaultOptions, getAsyncOptions);
@@ -65,65 +65,58 @@ var clickHandler = function(e) {
 
     function getAsyncOptions(items) {
 
-	var tfbSettings = {
-	    url : items.tfbUrl,
-	    timeout : items.tfbTimeout,
-	    username : items.tfbUsername,
-	    password : items.tfbPassword,
-	    editBeforeSend : items.tfbEditBeforeSend
-	}
-	//--------------------------------------------------------------------------//
-	function getAsyncTabUrl(tabs) {
-	    tabUrl = tabs[0].url;
-	    sendRequest(tabUrl);
-	}
+        var tfbSettings = {
+            url : items.tfbUrl,
+            timeout : items.tfbTimeout,
+            username : items.tfbUsername,
+            password : items.tfbPassword,
+            editBeforeSend : items.tfbEditBeforeSend
+        }
+        //--------------------------------------------------------------------------//
+        function getAsyncTabUrl(tabs) {
+            tabUrl = tabs[0].url;
+            sendRequest(tabUrl);
+        }
 
-	chrome.tabs.query({currentWindow: true, active: true}, getAsyncTabUrl);
-	//--------------------------------------------------------------------------//
+        chrome.tabs.query({currentWindow: true, active: true}, getAsyncTabUrl);
+        //--------------------------------------------------------------------------//
 
-	function sendRequest(tabUrl) {
+        function sendRequest(tabUrl) {
 
-	    if (tfbSettings.editBeforeSend) {
-		chrome.tabs.create({
-		    url: chrome.extension.getURL('TFBEditFact.html'),
-		    active: true,
-		}, function(tab) {
+            if (tfbSettings.editBeforeSend) {
+                chrome.tabs.create({
+                    url: chrome.extension.getURL('TFBEditFact.html'),
+                    active: true,
+                }, function(tab) {
 
-		    chrome.windows.create({
-			tabId: tab.id,
-			width: 450,
-			height: 260,
-			type: "popup"
-		    });
-		    
-		    chrome.runtime.sendMessage({
-			msg: "editFact",
-			fact: e.selectionText,
-			source: tabUrl
-		    });
-		    
-		    chrome.runtime.onMessage.addListener(
-			function(request, sender, sendResponse){
-			    if (request.msg == "sendFact"){
-				sendFact(request.fact, request.source, request.tags, tfbSettings);
-				
-				if ( request.dontEdit ){
-				    chrome.storage.sync.set({ "tfbEditBeforeSend": false });
-				}
-				chrome.tabs.remove(tab.id);	    
-			    }
-			    
-			}
-		    );
-		    
-		});
-		
-
-	    } else {
-		sendFact(e.selectionText, tabUrl, "", tfbSettings);
-	    }
-	}
-    }	
+                    chrome.windows.create({
+                        tabId: tab.id,
+                        width: 450,
+                        height: 260,
+                        type: "popup"
+                    });
+                    chrome.runtime.sendMessage({
+                        msg: "editFact",
+                        fact: e.selectionText,
+                        source: tabUrl
+                    });
+                    chrome.runtime.onMessage.addListener(
+                        function(request, sender, sendResponse){
+                            if (request.msg == "sendFact"){
+                                sendFact(request.fact, request.source, request.tags, tfbSettings);
+                                if ( request.dontEdit ){
+                                    chrome.storage.sync.set({ "tfbEditBeforeSend": false });
+                                }
+                                chrome.tabs.remove(tab.id);
+                            }
+                        }
+                    );
+                });
+            } else {
+                sendFact(e.selectionText, tabUrl, "", tfbSettings);
+            }
+        }
+    }
 }
 
 
