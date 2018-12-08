@@ -50,7 +50,7 @@ function sendRequest(fact,source,tfbSettings) {
     if (tfbSettings.editBeforeSend) {
         chrome.tabs.create({
             url: chrome.extension.getURL('TFBEditFact.html'),
-            active: true,
+            active: false,
         }, function(tab) {
             chrome.windows.create({
                 tabId: tab.id,
