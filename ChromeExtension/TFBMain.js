@@ -55,14 +55,16 @@ function sendRequest(fact,source,tfbSettings) {
             chrome.windows.create({
                 tabId: tab.id,
                 width: 450,
-                height: 260,
+                height: 460,
                 type: "popup"
+            }, function(w){
+                chrome.runtime.sendMessage({
+                    msg: "editFact",
+                    fact: fact,
+                    source: source
+                });
             });
-            chrome.runtime.sendMessage({
-                msg: "editFact",
-                fact: fact,
-                source: source
-            });
+
             chrome.runtime.onMessage.addListener(
                 function(request, sender, sendResponse){
                     if (request.msg == "sendFact"){
