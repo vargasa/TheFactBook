@@ -1,30 +1,41 @@
 <html>
   <head>
     <title>Edit fact before send</title>
-    <script src="TFBEditFact.js"></script>
+    <link rel="stylesheet" href="Data/materialize/dist/css/materialize.min.css">
+    <script async src="Data/materialize/dist/js/materialize.min.js" sync></script>
   </head>
   <body>
-    <form id="EditFactForm">
-      <table>
-        <tbody>
-          <tr>
-            <td><label for="FactInput">Fact:</label></td>
-            <td><textarea id="FactInput" style="width: 240px; height: 100px;"></textarea></td>
-          </tr>
-          <tr>
-            <td><label for="SourceInput">Source:</label></td>
-            <td><input for="text" id="SourceInput" /></td>
-          </tr>
-          <tr>
-            <td><label for="TagsInput">Tags (Comma separated): </label></td>
-            <td><input type="text" id="TagsInput" /></td>
-          </tr>
-          <tr>
-            <td><label for="EditOption">Don't show again</label></td>
-            <td><input type="checkbox" id="EditOption" /></td>
-          </tr>
-        </tbody>
-      </table>
-      <p><input type="Submit" id="SubmitButton" value="Send" /></p>
-    </form>
+    <h3 class="center-align">TheFactBook</h3>
+    <div class="row s10 ">
+      <form class="col s10 offset-s1" id="EditFactForm">
+        <div class="row">
+          <div class="input-field row s10">
+            <label for="FactInput">Fact:</label>
+            <textarea id="FactInput" class="materialize-textarea"></textarea>
+          </div>
+          <div class="input-field row s10">
+            <label for="SourceInput">Source:</label>
+            <input type="text" id="SourceInput" />
+          </div>
+          <div class="input-field row s10">
+            <label for="TagsInput">Tags (Comma separated): </label>
+            <input type="text" id="TagsInput" />
+            <span class="helper-text" data-error="wrong" data-success="right">e.g: life,science,tech</span>
+          </div>
+          <div class="row s10">
+            <p>
+              <label>
+                <input type="checkbox" id="EditOption" />
+                <span>Don't show again</span>
+              </label>
+              </p>
+          </div>
+          <div class="row s10"
+            <p>
+              <input type="Submit" id="SubmitButton" value="Send" class="btn"/>
+            </p>
+        </div>
+    </div>
+    <script defer src="TFBEditFact.js"></script>
+  </body>
 </html>
