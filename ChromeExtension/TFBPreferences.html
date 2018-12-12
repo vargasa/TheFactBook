@@ -2,23 +2,97 @@
 <html lang="en-US">
   <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="Data/materialize/dist/css/materialize.min.css">
+    <script src="Data/materialize/dist/js/materialize.min.js"></script>
     <title>TheFactBook Extension - Preferences</title>
   </head>
-  <body>
-    <h1>TheFactBook - Preferences</h1>
-    <form>
-      <label for="UrlInput">TFB Url:</label><br/>
-      <input id="UrlInput" type="text" name="TfbUrl" value="" required/><br/>
-      <label for="TimeoutInput">Timeout:</label><br/>
-      <input id="TimeoutInput" type="number" name="TfbTimeout" value="" required/><br/>
-      <label for="UsernameInput">Username:</label><br/>
-      <input id="UsernameInput" type="text" name="TfbUsername" value="" required/><br/>
-      <label for="PasswordInput">Password:</label><br/>
-      <input id="PasswordInput" type="password" name="TfbPassword" value="" required/><br/>
-      <label for="EditBeforeSendCheckbox">Edit before send: </label>
-      <input type="checkbox" id="EditBeforeSendCheckbox" /><br/>
-      <input id="SaveButton" type="button" value="Save" />
-    </form>
+  <body class="container">
+    <div class="row">
+      <div class="col s12">
+        <ul class="tabs">
+          <li class="tab col s6">
+            <a class="active" href="#tabPreferences">Preferences</a>
+          </li>
+          <li class="tab col s6">
+            <a href="#tabNewUser">Create User</a>
+          </li>
+        </ul>
+      </div>
+      <div id="tabPreferences" class="col s12">
+        <div class="row">
+          <form class="col s10 offset-s1">
+            <div class="row">
+              <div class="input-field row s10">
+                <label for="UrlInput">TFB Url:</label>
+                <input id="UrlInput" type="text"
+                       name="TfbUrl" value="" required/>
+              </div>
+              <div class="input-field row s10">
+                <label for="TimeoutInput">Timeout:</label>
+                <input id="TimeoutInput" type="number"
+                       name="TfbTimeout" value="" required/>
+              </div>
+              <div class="input-field row s10">
+                <label for="UsernameInput">Username:</label>
+                <input id="UsernameInput" type="text"
+                       name="TfbUsername" value="" required/>
+              </div>
+              <div class="input-field row s10">
+                <label for="PasswordInput">Password:</label>
+                <input id="PasswordInput" type="password"
+                       name="TfbPassword" value="" required/>
+              </div>
+              <div class="row s10">
+                <p>
+                  <label>
+                    <input type="checkbox" id="EditBeforeSendCheckbox" />
+                    <span>Edit before send</span>
+                  </label>
+                </p>
+              </div>
+              <input id="SubmitPreferences" type="button" value="Save" class="btn"/>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="tabNewUser" class="col s12">
+        <div class="row">
+          <form class="col s10 offset-s1">
+            <div class="row">
+              <div class="input-field row s10">
+                <label for="NewUserUrlInput">TFB Url:</label>
+                <input id="NewUserUrlInput" type="text"
+                       name="TfbUrl" value="" required/>
+              </div>
+              <div class="input-field row s10">
+                <label for="NewUserUsernameInput">Username:</label>
+                <input id="NewUserUsernameInput" type="text"
+                       name="TfbUsername" value="" required/>
+              </div>
+              <div class="input-field row s10">
+                <label for="NewUserPasswordInput">Password:</label>
+                <input id="NewUserPasswordInput" type="password"
+                       name="TfbPassword" value="" required/>
+              </div>
+              <div class="input-field row s10">
+                <label for="NewUserPasswordInput1">Confirm Password:</label>
+                <input id="NewUserPasswordInput1" type="password"
+                       name="TfbPasswordConfirm" required/>
+              </div>
+              <div class="row s10">
+                <p>
+                  <label>
+                    <input type="checkbox" id="ShowPassword" />
+                    <span>Show Password</span>
+                  </label>
+                </p>
+              </div>
+              <input id="SubmitNewUser" type="button" value="Create" class="btn"/>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
   <div id="StatusLabel"></div>
   <script src="TFBPreferences.js"></script>

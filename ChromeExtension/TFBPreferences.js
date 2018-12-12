@@ -1,3 +1,34 @@
+function createUser() {
+    var http = new XMLHttpRequest();
+
+    var tfbUrl = document.getElementById('NewUserUrlInput').value;
+    var tfbUsername = document.getElementById('NewUserUsernameInput').value;
+    var tfbPassword = document.getElementById('NewUserPasswordInput').value;
+    http.open("POST", tfbSettings.url + "/api.php?action=addUser", true);
+    http.setRequestHeader("Content-type",
+                          "application/x-www-form-urlencoded");
+    http.ontimeout = function() {
+        notifyUser("TheFactBook server has Timed out");
+    };
+    http.onreadystatechange = function () {
+        if (  this.readyState == 4 && this.status == 200) {
+            var r = http.responseText;
+            r = JSON.parse(r);
+            if (! r.Error){
+                notifyUser("User " + tfbUsername
+                           + " succesfully created!");
+            } else {
+                notifyUser(r.Description);
+            }
+        }
+    };
+    tfbUsername = encodeURIComponent(tfbUsername);
+    tfbPassword = encodeURIComponent(tfbPassword);
+    var params = "username=" + tfbUsername
+        + "&password=" + tfbPassword;
+    http.send(params);
+}
+
 function saveOptions() {
 
     var tfbUrl = document.getElementById('UrlInput').value;
@@ -54,4 +85,12 @@ function restoreOptions() {
 }
 
 document.addEventListener('DOMContentLoaded', restoreOptions);
-document.getElementById('SaveButton').addEventListener('click', saveOptions);
+document.addEventListener('DOMContentLoaded', function() {
+    var instances = M.AutoInit();
+    document.getElementById('UrlInput').click();
+    document.getElementById('TimeoutInput').click();
+    document.getElementById('UsernameInput').click();
+    document.getElementById('PasswordInput').click();
+});
+document.getElementById('SubmitPreferences').addEventListener('click', saveOptions);
+document.getElementById('SubmitNewUser').addEventListener('click', createUser);
