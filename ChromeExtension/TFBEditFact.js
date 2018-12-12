@@ -24,6 +24,8 @@ function cb(request, sender, sendResponse){
             });
         }, false);
     }
+    M.updateTextFields();
+    M.textareaAutoResize(factInput);
 }
 
 chrome.runtime.onMessage.addListener(cb);

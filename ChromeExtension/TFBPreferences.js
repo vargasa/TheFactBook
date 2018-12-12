@@ -79,6 +79,7 @@ function restoreOptions() {
         document.getElementById('UsernameInput').value = items.tfbUsername;
         document.getElementById('PasswordInput').value = items.tfbPassword;
         document.getElementById('EditBeforeSendCheckbox').checked = items.tfbEditBeforeSend;
+        M.updateTextFields();
     }
 
     chrome.storage.sync.get(tfbDefaultOptions, fillValues);
@@ -86,10 +87,8 @@ function restoreOptions() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    restoreOptions()
-    var instances = M.AutoInit();
-    M.textareaAutoResize(document.getElementById('UrlInput'));
-    M.updateTextFields();
+    M.AutoInit();
+    restoreOptions();
 });
 document.getElementById('SubmitPreferences').addEventListener('click', saveOptions);
 document.getElementById('SubmitNewUser').addEventListener('click', createUser);
