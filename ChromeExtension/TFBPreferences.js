@@ -1,4 +1,14 @@
 
+function showPassword(){
+    var showPassword = document.getElementById('ShowPassword').checked;
+
+    if (showPassword){
+        document.getElementById('NewUserPasswordInput').type = "text";
+    } else {
+        document.getElementById('NewUserPasswordInput').type = "password";
+    }
+}
+
 function notifyUser(message){
     chrome.notifications.create("basic", {
         "type":"basic",
@@ -92,3 +102,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 document.getElementById('SubmitPreferences').addEventListener('click', saveOptions);
 document.getElementById('SubmitNewUser').addEventListener('click', createUser);
+document.getElementById('ShowPassword').addEventListener('click',showPassword);
