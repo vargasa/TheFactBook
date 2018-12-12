@@ -1,10 +1,20 @@
+
+function notifyUser(message){
+    chrome.notifications.create("basic", {
+        "type":"basic",
+        "iconUrl":"Data/TFBIcon.png",
+        "title":"TheFactBook:",
+        "message": message.toString()
+    });
+}
+
 function createUser() {
     var http = new XMLHttpRequest();
 
     var tfbUrl = document.getElementById('NewUserUrlInput').value;
     var tfbUsername = document.getElementById('NewUserUsernameInput').value;
     var tfbPassword = document.getElementById('NewUserPasswordInput').value;
-    http.open("POST", tfbSettings.url + "/api.php?action=addUser", true);
+    http.open("POST", tfbUrl + "/api.php?action=addUser", true);
     http.setRequestHeader("Content-type",
                           "application/x-www-form-urlencoded");
     http.ontimeout = function() {
@@ -45,19 +55,10 @@ function saveOptions() {
         tfbEditBeforeSend: tfbEditBeforeSend
     };
 
-    function updateStatus(message) {
-        var status = document.getElementById('StatusLabel');
-        status.textContent = message.toString();
-        
-        setTimeout(function() {
-            status.textContent = '';
-        }, 1000);
-    }
-
     if (! tfbUrl || ! tfbTimeout || ! tfbUsername || ! tfbPassword) {
-        updateStatus("All options are required");
+        notifyUser("All options are required");
     } else {
-        chrome.storage.sync.set(tfbNewOptions, updateStatus("Options Saved!"));
+        chrome.storage.sync.set(tfbNewOptions, notifyUser("Options Saved!"));
     }
 
 }
@@ -84,13 +85,11 @@ function restoreOptions() {
 
 }
 
-document.addEventListener('DOMContentLoaded', restoreOptions);
 document.addEventListener('DOMContentLoaded', function() {
+    restoreOptions()
     var instances = M.AutoInit();
-    document.getElementById('UrlInput').click();
-    document.getElementById('TimeoutInput').click();
-    document.getElementById('UsernameInput').click();
-    document.getElementById('PasswordInput').click();
+    M.textareaAutoResize(document.getElementById('UrlInput'));
+    M.updateTextFields();
 });
 document.getElementById('SubmitPreferences').addEventListener('click', saveOptions);
 document.getElementById('SubmitNewUser').addEventListener('click', createUser);
