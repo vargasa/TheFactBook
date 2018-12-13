@@ -103,6 +103,35 @@ function restoreSettings() {
 
 }
 
+
+function openDashboard(tfbSettings){
+    function stringCode(){
+        return "document.getElementById('UsernameLoginInput').value = '"
+            + tfbSettings.username
+            +"'; document.getElementById('PasswordLoginInput').value = '"
+            + tfbSettings.password
+            + "'; document.getElementById('LoginButton').click();"
+    }
+    chrome.tabs.create({
+        url: tfbSettings.url,
+        active: true,
+    });
+    chrome.tabs.executeScript(null,{
+        code : stringCode(),
+    });
+}
+
+function readSettings(){
+    tfbSettings = {
+        url : document.getElementById('UrlInput').value,
+        timeout : document.getElementById('TimeoutInput').value,
+        username : document.getElementById('UsernameInput').value,
+        password : document.getElementById('PasswordInput').value,
+        edit: document.getElementById('EditBeforeSendCheckbox').checked
+    }
+    return tfbSettings;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     M.AutoInit();
     restoreSettings();
@@ -110,13 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.getElementById('SubmitPreferences')
     .addEventListener('click', function() {
-        tfbSettings = {
-            url : document.getElementById('UrlInput').value,
-            timeout : document.getElementById('TimeoutInput').value,
-            username : document.getElementById('UsernameInput').value,
-            password : document.getElementById('PasswordInput').value,
-            edit: document.getElementById('EditBeforeSendCheckbox').checked
-        }
+        tfbSettings = readSettings();
         saveSettings(tfbSettings);
     });
 
@@ -124,3 +147,8 @@ document.getElementById('SubmitNewUser').addEventListener('click', createUser);
 document.getElementById('ShowPassword').addEventListener('click',showPassword);
 document.getElementById('ShowPasswordPreferences')
     .addEventListener('click',showPassword);
+document.getElementById('MyFactsBtn')
+    .addEventListener('click', function (){
+        tfbSettings = readSettings();
+        openDashboard(tfbSettings);
+    });
