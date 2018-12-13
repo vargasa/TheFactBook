@@ -7,6 +7,14 @@ function showPassword(){
     } else {
         document.getElementById('NewUserPasswordInput').type = "password";
     }
+
+    showPassword = document.getElementById('ShowPasswordPreferences').checked;
+
+    if (showPassword) {
+        document.getElementById('PasswordInput').type = "text";
+    } else {
+        document.getElementById('PasswordInput').type = "password";
+    }
 }
 
 function notifyUser(message){
@@ -113,3 +121,5 @@ document.getElementById('SubmitPreferences')
 
 document.getElementById('SubmitNewUser').addEventListener('click', createUser);
 document.getElementById('ShowPassword').addEventListener('click',showPassword);
+document.getElementById('ShowPasswordPreferences')
+    .addEventListener('click',showPassword);
