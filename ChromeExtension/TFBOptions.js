@@ -90,6 +90,7 @@ function restoreSettings() {
 
     function fillValues(tfbSettings) {
         document.getElementById('UrlInput').value = tfbSettings.url;
+        document.getElementById('NewUserUrlInput').value = tfbSettings.url;
         document.getElementById('TimeoutInput').value = tfbSettings.timeout;
         document.getElementById('UsernameInput').value = tfbSettings.username;
         document.getElementById('PasswordInput').value = tfbSettings.password;
