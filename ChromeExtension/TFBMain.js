@@ -47,7 +47,7 @@ function sendFact(fact, source, tags, tfbSettings) {
 }
 
 function sendRequest(fact,source,tfbSettings) {
-    if (tfbSettings.editBeforeSend) {
+    if (tfbSettings.edit) {
         chrome.tabs.create({
             url: chrome.extension.getURL('TFBEditFact.html'),
             active: false,
@@ -92,26 +92,19 @@ var clickHandler = function(e) {
     //--------------------------------------------------------------------------//
 
     var tfbDefaultOptions = {
-        tfbUrl: 'https://thefactbook.ml/',
-        tfbTimeout: 5,
-        tfbUsername: 'guest',
-        tfbPassword: 'guest',
-        tfbEditBeforeSend: true
+        url: 'https://thefactbook.ml/',
+        timeout: 5,
+        username: 'guest',
+        password: 'guest',
+        edit: true
     };
 
-    chrome.storage.sync.get(tfbDefaultOptions, getAsyncOptions);
+    chrome.storage.sync.get(tfbDefaultOptions, getAsyncSettings);
 
     //--------------------------------------------------------------------------//
 
-    function getAsyncOptions(items) {
+    function getAsyncSettings(tfbSettings) {
 
-        var tfbSettings = {
-            url : items.tfbUrl,
-            timeout : items.tfbTimeout,
-            username : items.tfbUsername,
-            password : items.tfbPassword,
-            editBeforeSend : items.tfbEditBeforeSend
-        }
         //--------------------------------------------------------------------------//
         function getAsyncTabUrl(tabs) {
             source = tabs[0].url;

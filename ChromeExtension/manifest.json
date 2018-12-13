@@ -7,7 +7,7 @@
     "manifest_version":2,
 
     "options_ui":{
-        "page":"TFBPreferences.html",
+        "page":"TFBOptions.html",
         "chrome_style":true
     },
     "icons": {
@@ -27,7 +27,7 @@
         "scripts":["TFBMain.js"]
     },
     "browser_action":{
-        "default_title": "TheFactBook Preferences",
-        "default_popup": "TFBPreferences.html"
+        "default_title": "TheFactBook Options",
+        "default_popup": "TFBOptions.html"
     }
 }

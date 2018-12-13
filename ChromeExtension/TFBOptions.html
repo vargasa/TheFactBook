@@ -10,7 +10,7 @@
       }
     </style>
     <script src="Data/materialize/dist/js/materialize.min.js"></script>
-    <title>TheFactBook Extension - Preferences</title>
+    <title>TheFactBook Extension - Options</title>
   </head>
   <body>
     <div class="row">
@@ -34,11 +34,6 @@
                        name="TfbUrl" value="" required/>
               </div>
               <div class="input-field row s10">
-                <label class="active"  for="TimeoutInput">Timeout:</label>
-                <input id="TimeoutInput" type="number"
-                       name="TfbTimeout" value="" required/>
-              </div>
-              <div class="input-field row s10">
                 <label class="active"  for="UsernameInput">Username:</label>
                 <input id="UsernameInput" type="text"
                        name="TfbUsername" value="" required/>
@@ -47,6 +42,11 @@
                 <label class="active" for="PasswordInput">Password:</label>
                 <input id="PasswordInput" type="password"
                        name="TfbPassword" value="" required/>
+              </div>
+              <div class="input-field row s10">
+                <label class="active"  for="TimeoutInput">Timeout:</label>
+                <input id="TimeoutInput" type="number"
+                       name="TfbTimeout" value="" required/>
               </div>
               <div class="row s10">
                 <p>
@@ -95,5 +95,5 @@
       </div>
     </div>
   </body>
-  <script src="TFBPreferences.js"></script>
+  <script src="TFBOptions.js"></script>
 </html>

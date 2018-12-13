@@ -37,6 +37,14 @@ function createUser() {
             if (! r.Error){
                 notifyUser("User " + tfbUsername
                            + " succesfully created!");
+                tfbSettings = {
+                    url: tfbUrl,
+                    username: tfbUsername,
+                    password: tfbPassword,
+                    timeout: 5, /*default*/
+                    edit: true /*default*/
+                };
+                saveSettings(tfbSettings);
             } else {
                 notifyUser(r.Description);
             }
@@ -49,57 +57,59 @@ function createUser() {
     http.send(params);
 }
 
-function saveOptions() {
+function saveSettings(tfbSettings) {
 
-    var tfbUrl = document.getElementById('UrlInput').value;
-    var tfbTimeout = document.getElementById('TimeoutInput').value;
-    var tfbUsername = document.getElementById('UsernameInput').value;
-    var tfbPassword = document.getElementById('PasswordInput').value;
-    var tfbEditBeforeSend = document.getElementById('EditBeforeSendCheckbox').checked;
-
-    var tfbNewOptions = {
-        tfbUrl: tfbUrl,
-        tfbTimeout: tfbTimeout,
-        tfbUsername: tfbUsername,
-        tfbPassword: tfbPassword,
-        tfbEditBeforeSend: tfbEditBeforeSend
-    };
-
-    if (! tfbUrl || ! tfbTimeout || ! tfbUsername || ! tfbPassword) {
-        notifyUser("All options are required");
+    if (! tfbSettings.url
+        || ! tfbSettings.timeout
+        || ! tfbSettings.username
+        || ! tfbSettings.password) {
+        notifyUser("All settings are required");
     } else {
-        chrome.storage.sync.set(tfbNewOptions, notifyUser("Options Saved!"));
+        chrome.storage.sync.set(tfbSettings, notifyUser("Settings Saved!"));
     }
 
 }
 
-function restoreOptions() {
+function restoreSettings() {
 
-    var tfbDefaultOptions = {
-        tfbUrl: 'https://thefactbook.ml/',
-        tfbTimeout: 5,
-        tfbUsername: 'guest',
-        tfbPassword: 'guest',
-        tfbEditBeforeSend: true
+    var tfbDefaultSettings = {
+        url: 'https://thefactbook.ml/',
+        timeout: 5,
+        username: 'guest',
+        password: 'guest',
+        edit: true
     }
 
-    function fillValues(items) {
-        document.getElementById('UrlInput').value = items.tfbUrl;
-        document.getElementById('TimeoutInput').value = items.tfbTimeout;
-        document.getElementById('UsernameInput').value = items.tfbUsername;
-        document.getElementById('PasswordInput').value = items.tfbPassword;
-        document.getElementById('EditBeforeSendCheckbox').checked = items.tfbEditBeforeSend;
+    function fillValues(tfbSettings) {
+        document.getElementById('UrlInput').value = tfbSettings.url;
+        document.getElementById('TimeoutInput').value = tfbSettings.timeout;
+        document.getElementById('UsernameInput').value = tfbSettings.username;
+        document.getElementById('PasswordInput').value = tfbSettings.password;
+        document.getElementById('EditBeforeSendCheckbox')
+            .checked = tfbSettings.edit;
         M.updateTextFields();
     }
 
-    chrome.storage.sync.get(tfbDefaultOptions, fillValues);
+    chrome.storage.sync.get(tfbDefaultSettings, fillValues);
 
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     M.AutoInit();
-    restoreOptions();
+    restoreSettings();
 });
-document.getElementById('SubmitPreferences').addEventListener('click', saveOptions);
+
+document.getElementById('SubmitPreferences')
+    .addEventListener('click', function() {
+        tfbSettings = {
+            url : document.getElementById('UrlInput').value,
+            timeout : document.getElementById('TimeoutInput').value,
+            username : document.getElementById('UsernameInput').value,
+            password : document.getElementById('PasswordInput').value,
+            edit: document.getElementById('EditBeforeSendCheckbox').checked
+        }
+        saveSettings(tfbSettings);
+    });
+
 document.getElementById('SubmitNewUser').addEventListener('click', createUser);
 document.getElementById('ShowPassword').addEventListener('click',showPassword);
