@@ -64,10 +64,9 @@ function sendRequest(fact,source,tfbSettings) {
                     source: source
                 });
             });
-
             chrome.runtime.onMessage.addListener(
                 function(request, sender, sendResponse){
-                    if (request.msg == "sendFact"){
+                    if (request.msg == "sendFact" && sender.tab.id == tab.id){
                         sendFact(request.fact,
                                  request.source,
                                  request.tags,
