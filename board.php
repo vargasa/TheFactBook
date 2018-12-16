@@ -37,7 +37,7 @@
           <div id="AddFactForm" class="row s12">
             <div class="col s8 offset-s2">
               <h4>Add a fact manually</h4>
-              <form  name="addForm">
+              <form id="FactFormEdit">
                 <div class="row">
                   <label for="FactText">Fact:</label>
                   <textarea class="materialize-textarea" id="FactText" name="fact" rows="4" cols="50" required></textarea>

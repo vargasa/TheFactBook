@@ -205,7 +205,6 @@ function deleteFact(id) {
         function processResponse() {
             if(http.readyState == 4 && http.status == 200) {
                 var r = http.responseText;
-                console.log(r);
                 r = JSON.parse(r);
                 if (! r.Error) {
                     var fbt = document.getElementById("FactTableBody");
@@ -239,7 +238,12 @@ function submitFactHandler() {
         document.getElementById("SendFactButton").value = "Sending...";
         
         var http = new XMLHttpRequest();
-        var FD  = new FormData(form);
+
+        var postBody =
+            "fact=" + document.getElementById("FactText").value
+            + "&source=" + document.getElementById("SourceInput").value
+            + "&tags=" + document.getElementById("TagsInput").value
+            + "&id=" + document.getElementById("IDInput").value;
 
         function resetSendFactButton() {
             document.getElementById("SendFactButton").disabled = false;
@@ -250,7 +254,9 @@ function submitFactHandler() {
         http.open("POST","api.php?action=addFact");
         http.ontimeout = function(){ alert("Timed out"); resetSendFactButton() };
         http.timeout = 5000;
-        http.send(FD);
+        http.setRequestHeader("Content-type",
+                              "application/x-www-form-urlencoded");
+        http.send(postBody);
         
         function processResponse() {
             
@@ -262,10 +268,6 @@ function submitFactHandler() {
             if (r.Error == 0 && r.Edited == false) {
 
                 resetSendFactButton();
-
-                var fbt = document.getElementById("FactTableBody");
-                var nftr = document.createElement('tr');
-
                 domAddFact(r.Id, r.Fact, r.Source, r.Tags , r.Time, true);
 
                 window.location.href="#MainDiv";
@@ -287,20 +289,18 @@ function submitFactHandler() {
                 resetAddFactForm();
 
             } else if (r.Error != 0) {
-
                 alert(r.Description);
-                
             } else {
                 alert("Something went wrong on the server said");
             }
 
-            document.getElementById("AddFactForm").reset();
+            document.getElementById("FactFormEdit").reset();
         }
     }
 
-    var form = document.getElementById("AddFactForm");
+    var submitButton = document.getElementById("SendFactButton")
     
-    form.addEventListener("submit", function (event) {
+    submitButton.addEventListener("click", function (event) {
         event.preventDefault();
         sendData();
     });
