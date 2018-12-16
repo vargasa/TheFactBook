@@ -182,14 +182,18 @@ function editFact(id) {
         return text;
     }
 
-    document.getElementById("FactText").value = 
+    factInput = document.getElementById("FactText");
+    factInput.value =
         document.getElementById("TFBFactID" + id).textContent;
+    M.textareaAutoResize(factInput);
     document.getElementById("SourceInput").value =
         document.getElementById("TFBSourceID" + id).href;
     document.getElementById("TagsInput").value =
         editTags(document.getElementById("TFBTagsID" + id).textContent);
     document.getElementById("IDInput").value = id;
     document.getElementById("SendFactButton").value = "Modify";
+    M.updateTextFields();
+
 }
 //-----------------------------------------------------
 function resetAddFactForm() {
