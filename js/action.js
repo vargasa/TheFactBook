@@ -33,27 +33,38 @@ function domAddFact(id, fact, source, tags, time, prepend) {
     prepend = typeof prepend !== 'undefined' ? prepend : false;
 
     var fbt = document.getElementById("FactTableBody");
-    var nftr = document.createElement('tr');
+    var nfdiv = document.createElement('div');
     var parser = document.createElement('a');
     parser.href = source;
 
     var reg = new RegExp(searchTerm,"ig");
-                    
-    nftr.setAttribute('class','TFBItem');
-    nftr.setAttribute('id','TFBItemID'+id);
-    nftr.innerHTML = '<td class="Facts">'
-        + '<p id="TFBFactID' + id + '">' + fact.replace(reg,"<span class='Highlight'>" + searchTerm + "</span>") + '<p/>' + '<div class="TagsDiv" id="TFBTagsID' + id +'">' + parseTags(tags) + '</div>'
-        + '<a id="TFBSourceID' + id + '" href="' + source + '" target="_blank">' + parser.hostname + '</a> '
+    nfdiv.setAttribute('class','TFBItem row s12 Facts');
+    nfdiv.setAttribute('id','TFBItemID'+id);
+    nfdiv.innerHTML = '<div class="s12">'
+        + '<div class="col s10" >'
+        + '<p id="TFBFactID' + id + '">'
+        + fact.replace(reg,"<span class='Highlight'>"
+                       + searchTerm + "</span>")
+        + '</p></div><div class="col s2 Time">' 
+        +  time
+        + '</div>'
+        + '<div class="row s12">'
+        + '<div class="col s6">'
+        + '<a id="TFBSourceID' + id + '" href="' + source + '" target="_blank">'
+        + parser.hostname
+        + '</a> '
         + '| <a href="#AddFactForm" class="EditButton" onClick="editFact(' + id + ')">Edit</a> | '
         + '<a href="#" class="DeleteButton" onClick="deleteFact(' + id + ')">Delete</a> | '
-        + '</td>'
-        + '<td class="Time">' 
-        +  time
-        + '</td>';
+        + '</div>'
+        + '<div class="col s6 center-align" id="TFBTagsID' + id + '">'
+        + parseTags(tags)
+        + '</div>'
+        + '</div></div></div>';
+
     if (prepend) {
-        fbt.insertBefore(nftr,fbt.firstChild);
+        fbt.insertBefore(nfdiv,fbt.firstChild);
     } else {
-        fbt.appendChild(nftr);
+        fbt.appendChild(nfdiv);
     }
 }
 //-----------------------------------------------------
