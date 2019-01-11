@@ -3,7 +3,7 @@
     "name": "TheFactBook Addon",
     "description": "Add Facts to your TFB Instance easily",
     "author": "Andrés Vargas",
-    "version": "0.1",
+    "version": "1.1",
     "manifest_version":2,
 
     "options_ui":{
