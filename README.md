@@ -16,6 +16,9 @@ That way you will never forget where you read it! a timestamp is also added
 so if for some reason the source of the content is gone/changed you can use
 [The WayBack Machine](https://archive.org/web/) to prove your point.
 
+A Youtube video showing the use of the Chrome Extension:
+[![TheFactBook - Chrome Extension - Youtube Video](https://img.youtube.com/vi/jGxRxCWM5j8/0.jpg)](https://www.youtube.com/watch?v=jGxRxCWM5j8)
+
 Service is runing at:
 * http://thefactbook.ml/
 
